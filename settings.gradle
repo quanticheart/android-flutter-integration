@@ -1,0 +1,42 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        google()
+        mavenCentral()
+    }
+
+}
+dependencyResolutionManagement {
+    // For add Folder, change to PREFER_PROJECT
+    repositoriesMode.set(RepositoriesMode.PREFER_PROJECT)
+    String storageUrl = System.env.FLUTTER_STORAGE_BASE_URL ?: "https://storage.googleapis.com"
+    repositories {
+        google()
+        mavenCentral()
+
+        //For add AAR
+//        maven {
+//            url '/Users/jonnalves/FlutterProjects/modules/flutter_module/build/host/outputs/repo'
+//        }
+        maven {
+            url "$storageUrl/download.flutter.io"
+        }
+    }
+
+}
+rootProject.name = "fluttertest"
+include ':app'
+
+// For add Folder
+//For Flutter Folder in outside android repo/folder
+setBinding(new Binding([gradle:this]))
+evaluate(new File(
+        '/Users/jonnalves/FlutterProjects/modules',
+        'flutter_module/.android/include_flutter.groovy'
+))
+
+//For Flutter Folder in same android repo/folder
+//evaluate(new File(
+//        settingsDir.parentFile,
+//        'flutter_module/.android/include_flutter.groovy'
+//))
